@@ -39,8 +39,8 @@ def call(dockerRepoName, imageName){
                 when {
                     expression { env.GIT_BRANCH == 'origin/main'}
                 }
-                dir("${imageName}") {
-                    steps {
+                steps {
+                    dir("${imageName}") {
                             withCredentials([string(credentialsId: 'jackDockerHub', variable: 'TOKEN')]) {
                             sh "docker login -u 'jacklf2' -p '$TOKEN' docker.io"
                             sh "docker build -t ${dockerRepoName}:latest --tag jacklf2/${dockerRepoName}:${imageName} ."
