@@ -26,7 +26,8 @@ def call(dockerRepoName, imageName){
             stage('Security'){
                 steps {
                     dir("${imageName}") {
-                        sh './venv/bin/bandit -r *.py'
+                        sh 'pip install bandit'
+                        sh 'bandit -r *.py'
                     }
                 }
             }
