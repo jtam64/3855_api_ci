@@ -25,17 +25,17 @@ def call(dockerRepoName, imageName){
             }
             stage('Security'){
                 steps {
-                    echo ${dockerRepoName}
+                    echo "${dockerRepoName}"
                 }
             }
             stage('Package'){
                 steps {
-                    echo ${dockerRepoName}
+                    echo "${dockerRepoName}"
                 }
             }
             stage('Deploy'){
                 steps {
-                    echo ${dockerRepoName}
+                    echo "${dockerRepoName}"
                 }
             }
         }
