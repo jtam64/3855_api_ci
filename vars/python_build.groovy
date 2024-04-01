@@ -7,7 +7,7 @@ def call(dockerRepoName, imageName){
         stages {
             stage('Build') {
                 steps {
-                    dir(${imageName}) {
+                    dir("${imageName}") {
                         sh 'rm -rf venv'
                         sh 'python3 -m venv venv'
                         sh 'chmod +x venv/bin/activate'
