@@ -31,6 +31,7 @@ def call(dockerRepoName, imageName){
                         pip install bandit 
                         bandit -r *.py -f html -o bandit.html || true
                         ''' 
+                        archiveArtifacts artifacts: 'bandit.html'
                     }
                 }
             }
