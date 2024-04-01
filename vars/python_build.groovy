@@ -11,8 +11,7 @@ def call(dockerRepoName, imageName){
                         sh 'rm -rf venv'
                         sh 'python3 -m venv venv'
                         sh 'chmod +x venv/bin/activate'
-                        sh '. venv/bin/activate'
-                        sh 'pip install -r requirements.txt'
+                        sh '. venv/bin/activate && pip install -r requirements.txt'
                     }
                 }
             }
@@ -26,7 +25,6 @@ def call(dockerRepoName, imageName){
             stage('Security'){
                 steps {
                     dir("${imageName}") {
-                        sh 'pip install bandit'
                         sh 'bandit -r *.py'
                     }
                 }
