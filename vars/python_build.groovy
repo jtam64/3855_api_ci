@@ -11,21 +11,22 @@ def call(dockerRepoName, imageName){
                         sh 'rm -rf venv'
                         sh 'python3 -m venv venv'
                         sh 'chmod +x venv/bin/activate'
-                        sh '. venv/bin/activate && pip install -r requirements.txt'
+                        sh '. venv/bin/activate &&' 
+                        sh 'pip install -r requirements.txt'
                     }
                 }
             }
             stage('Lint'){
                 steps {
                     dir("${imageName}") {
-                        sh './venv/bin/activate && pylint --fail-under=5 *.py'
+                        sh 'pylint --fail-under=5 *.py'
                     }
                 }
             }
             stage('Security'){
                 steps {
                     dir("${imageName}") {
-                        sh './venv/bin/activate && bandit -r *.py'
+                        sh './venv/bin/bandit -r *.py'
                     }
                 }
             }
