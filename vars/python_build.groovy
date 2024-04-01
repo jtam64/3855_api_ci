@@ -19,7 +19,7 @@ def call(dockerRepoName, imageName){
             stage('Lint'){
                 steps {
                     dir("${imageName}") {
-                        sh 'pylint --fail-under=5 *.py'
+                        sh 'pylint --fail-under=5 .'
                     }
                 }
             }
