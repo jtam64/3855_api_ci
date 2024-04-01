@@ -25,17 +25,19 @@ def call(dockerRepoName, imageName){
             }
             stage('Security'){
                 steps {
-                    echo "${dockerRepoName}"
+                    dir("${imageName}") {
+                        sh 'bandit -r *.py'
+                    }
                 }
             }
             stage('Package'){
                 steps {
-                    echo "${dockerRepoName}"
+                    echo "${imageName}"
                 }
             }
             stage('Deploy'){
                 steps {
-                    echo "${dockerRepoName}"
+                    echo "${imageName}"
                 }
             }
         }
