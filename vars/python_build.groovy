@@ -18,14 +18,14 @@ def call(dockerRepoName, imageName){
             stage('Lint'){
                 steps {
                     dir("${imageName}") {
-                        sh 'pylint --fail-under=5 *.py'
+                        sh './venv/bin/activate pylint --fail-under=5 *.py'
                     }
                 }
             }
             stage('Security'){
                 steps {
                     dir("${imageName}") {
-                        sh 'bandit -r *.py'
+                        sh './venv/bin/activate bandit -r *.py'
                     }
                 }
             }
