@@ -7,27 +7,31 @@ def call(dockerRepoName, imageName){
         stages {
             stage('Build') {
                 steps {
-                    echo 'Building the Python App'
+                    sh 'rm -rf venv'
+                    sh 'python3 -m venv venv'
+                    sh 'chmod +x venv/bin/activate'
+                    sh '. venv/bin/activate'
+                    sh 'pip install -r requirements.txt'
                 }
             }
             stage('Lint'){
                 steps {
-                    echo 'Building the Python App'
+                    echo '${dockerRepoName}'
                 }
             }
             stage('Security'){
                 steps {
-                    echo 'Building the Python App'
+                    echo '${dockerRepoName}'
                 }
             }
             stage('Package'){
                 steps {
-                    echo 'Building the Python App'
+                    echo '${dockerRepoName}'
                 }
             }
             stage('Deploy'){
                 steps {
-                    echo 'Building the Python App'
+                    echo '${dockerRepoName}'
                 }
             }
         }
