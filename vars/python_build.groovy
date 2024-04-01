@@ -28,8 +28,7 @@ def call(dockerRepoName, imageName){
                     dir("${imageName}") {
                         sh '''
                         . venv/bin/activate
-                        echo $VIRTUAL_ENV
-                        pip install bandit 
+                        pip install bandit -f html -o bandit.html
                         bandit -r *.py'''
                     }
                 }
