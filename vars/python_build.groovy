@@ -6,14 +6,29 @@ def call(dockerRepoName, imageName){
         }
         stages {
             stage('Build') {
+                steps {
+                    echo 'Building the Python App'
+                }
             }
             stage('Lint'){
+                steps {
+                    echo 'Building the Python App'
+                }
             }
             stage('Security'){
+                steps {
+                    echo 'Building the Python App'
+                }
             }
             stage('Package'){
+                steps {
+                    echo 'Building the Python App'
+                }
             }
             stage('Deploy'){
+                steps {
+                    echo 'Building the Python App'
+                }
             }
         }
     }
