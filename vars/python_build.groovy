@@ -26,10 +26,11 @@ def call(dockerRepoName, imageName){
             stage('Security'){
                 steps {
                     dir("${imageName}") {
-                        sh '''echo $VIRTUAL_ENV
-                        '''
-                        sh 'pip install bandit'
-                        sh 'bandit -r *.py'
+                        sh '''
+                        . venv/bin/activate
+                        echo $VIRTUAL_ENV
+                        pip install bandit 
+                        bandit -r *.py'''
                     }
                 }
             }
