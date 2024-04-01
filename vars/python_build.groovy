@@ -11,8 +11,7 @@ def call(dockerRepoName, imageName){
                         sh 'rm -rf venv'
                         sh 'python3 -m venv venv'
                         sh 'chmod +x venv/bin/activate'
-                        sh '. venv/bin/activate'
-                        sh 'pip install -r requirements.txt'
+                        sh '. venv/bin/activate && pip install -r requirements.txt'
                     }
                 }
             }
@@ -42,8 +41,8 @@ def call(dockerRepoName, imageName){
                 steps {
                     dir("${imageName}") {
                             withCredentials([string(credentialsId: 'jackDockerHub', variable: 'TOKEN')]) {
-                            sh "docker login -u 'jacklf2' -p '$TOKEN' docker.io"
-                            sh "docker build -t ${dockerRepoName}:latest --tag jacklf2/${dockerRepoName}:${imageName} ."
+                            sh "docker login -u '${dockerRepoName}' -p '$TOKEN' docker.io"
+                            sh "docker build -t ${imageName}:latest --tag ${dockerRepoName}/${imageName} ."
                             sh "docker push jacklf2/${dockerRepoName}:${imageName}"
                         }
                     }
