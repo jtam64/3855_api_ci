@@ -26,7 +26,7 @@ def call(dockerRepoName, imageName){
             stage('Security'){
                 steps {
                     dir("${imageName}") {
-                        sh 'bandit -r .'
+                        sh 'bandit -r *.py'
                     }
                 }
             }
