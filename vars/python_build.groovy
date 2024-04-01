@@ -28,8 +28,8 @@ def call(dockerRepoName, imageName){
                     dir("${imageName}") {
                         sh '''
                         . venv/bin/activate
-                        pip install bandit -f html -o bandit.html
-                        bandit -r *.py'''
+                        pip install bandit 
+                        bandit -r *.py -f html -o bandit.html'''
                     }
                 }
             }
