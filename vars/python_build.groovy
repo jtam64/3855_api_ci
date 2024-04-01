@@ -11,7 +11,7 @@ def call(dockerRepoName, imageName){
                         sh 'rm -rf venv'
                         sh 'python3 -m venv venv'
                         sh 'chmod +x venv/bin/activate'
-                        sh 'source venv/bin/activate' 
+                        sh './venv/bin/activate' 
                         sh 'pip install -r requirements.txt'
                     }
                 }
