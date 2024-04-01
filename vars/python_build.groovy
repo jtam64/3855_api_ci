@@ -36,8 +36,15 @@ def call(dockerRepoName, imageName){
                 }
             }
             stage('Package'){
+                when {
+                    expression { env.GIT_BRANCH == 'origin/main'}
+                }
                 steps {
-                    echo "${imageName}"
+                        withCredentials([string(credentialsId: 'jackDockerHub', variable: 'TOKEN')]) {
+                        sh "docker login -u 'jacklf2' -p '$TOKEN' docker.io"
+                        sh "docker build -t ${dockerRepoName}:latest --tag jacklf2/${dockerRepoName}:${imageName} ."
+                        sh "docker push jacklf2/${dockerRepoName}:${imageName}"
+
                 }
             }
             stage('Deploy'){
