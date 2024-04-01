@@ -18,22 +18,24 @@ def call(dockerRepoName, imageName){
             }
             stage('Lint'){
                 steps {
-                    echo '${dockerRepoName}'
+                    dir("${imageName}") {
+                        sh 'pylint --fail-under=5 *.py'
+                    }
                 }
             }
             stage('Security'){
                 steps {
-                    echo '${dockerRepoName}'
+                    echo ${dockerRepoName}
                 }
             }
             stage('Package'){
                 steps {
-                    echo '${dockerRepoName}'
+                    echo ${dockerRepoName}
                 }
             }
             stage('Deploy'){
                 steps {
-                    echo '${dockerRepoName}'
+                    echo ${dockerRepoName}
                 }
             }
         }
