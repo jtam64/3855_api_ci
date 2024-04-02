@@ -56,6 +56,7 @@ def call(dockerRepoName, imageName){
                     dir("${imageName}") {
                         sshagent(credentials: ['jack-ssh-credential-id']) {
                             sh """
+                            chmod 666 /var/run/docker.sock
                             ssh -o StrictHostKeyChecking=no mysqluser@20.14.86.169 "cd 3855_app/${imageName} && docker pull ${dockerRepoName}/${imageName}:latest"
                             ssh -o StrictHostKeyChecking=no mysqluser@20.14.86.169 "cd 3855_app/deployment && docker compose up -d"
                             """
