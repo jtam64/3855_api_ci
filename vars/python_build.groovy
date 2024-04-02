@@ -49,8 +49,18 @@ def call(dockerRepoName, imageName){
                 }
             }
             stage('Deploy'){
+                when {
+                    expression { params.DEPLOY == true }
+                }
                 steps {
-                    echo "${imageName}"
+                    dir("${imageName}") {
+                        sshagent(credentials: ['jack-ssh-credential-id']) {
+                            sh '''
+                            ssh -o StrictHostKeyChecking=no mysqluser@20.14.86.169 "cd 3855_app && docker pull ${dockerRepoName}/${imageName}:latest"
+                            ssh -o StrictHostKeyChecking=no mysqluser@20.14.86.169 "cd 3855_app/deployment && docker-compose up -d"
+                            '''
+                        }
+                    }
                 }
             }
         }
