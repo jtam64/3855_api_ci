@@ -55,10 +55,10 @@ def call(dockerRepoName, imageName){
                 steps {
                     dir("${imageName}") {
                         sshagent(credentials: ['jack-ssh-credential-id']) {
-                            sh '''
+                            sh """
                             ssh -o StrictHostKeyChecking=no mysqluser@20.14.86.169 "cd 3855_app && docker pull ${dockerRepoName}/${imageName}:latest"
                             ssh -o StrictHostKeyChecking=no mysqluser@20.14.86.169 "cd 3855_app/deployment && docker-compose up -d"
-                            '''
+                            """
                         }
                     }
                 }
